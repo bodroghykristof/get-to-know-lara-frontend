@@ -1,15 +1,14 @@
 import React, { useState, useRef } from 'react';
 import UserFormContainer from './UserFormContainer';
+import axios from 'axios';
+import backEnd from '../general/Backend';
 
 function Register() {
   const [errorMessage, setErrorMessage] = useState('');
-  const [profilePicture, setProfilePicture] = useState(null);
   const userName = useRef(null);
   const email = useRef(null);
   const passwordOne = useRef(null);
   const passwordTwo = useRef(null);
-
-  const fileInput = useRef(null);
 
   const checkRegistration = () => {
     const userNameInput = userName.current.value;
@@ -27,9 +26,14 @@ function Register() {
     } else if (passwordOneInput !== passwordTwoInput) {
       setErrorMessage('Mismatching passwords!');
     } else {
-      window.location.replace('/test');
+      register();
     }
   };
+
+  async function register() {
+    await axios.get(`${backEnd.address}/api/users`);
+    window.location.replace('/test');
+  }
 
   return (
     <UserFormContainer>
