@@ -26,12 +26,18 @@ function Register() {
     } else if (passwordOneInput !== passwordTwoInput) {
       setErrorMessage('Mismatching passwords!');
     } else {
-      register();
+      const user = {
+        name: userNameInput,
+        email: emailInput,
+        password: passwordOneInput,
+      };
+      register(user);
     }
   };
 
-  async function register() {
-    await axios.get(`${backEnd.address}/api/users`);
+  async function register(user) {
+    const answer = await axios.post(`${backEnd.address}/api/users`, user);
+    console.log(answer);
     window.location.replace('/test');
   }
 
