@@ -33,7 +33,7 @@ function App() {
           render={() => <MailBox type='drafts' />}
         ></Route>
         <Route path='/mail/compose' exact component={Compose}></Route>
-        <Route path='/mail/view/:id' exact component={MailView}></Route>
+        <Route path='/mail/view/:mailId' exact component={MailView}></Route>
       </ThemeProvider>
     </Router>
   );

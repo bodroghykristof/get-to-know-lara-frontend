@@ -1,27 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import backEnd from '../general/Backend';
 
 function MailView(props) {
   const userId = 1;
-  const mail = props.location.state;
+  const { mailId } = useParams();
+  const [mail, setMail] = useState(props.location.state);
 
   useEffect(() => {
-    const setRead = async () => {
-      if (!mail.is_read && mail.id_user_to === userId) {
+    async function fetchMail() {
+      let mailData = mail;
+      if (mail === undefined) {
+        mailData = await axios.get(`${backEnd.address}/api/mails/${mailId}`)
+          .data;
+        console.log(mailData);
+      }
+      if (!mailData.is_read && mailData.id_user_to === userId) {
         const mailInfo = { id: mail.id, is_read: true };
         await axios.put(`${backEnd.address}/api/mails/${mail.id}`, mailInfo);
       }
-    };
-    setRead();
-  }, [mail]);
+      setMail(mailData);
+    }
+    fetchMail();
+  }, [mail, mailId]);
+
+  if (mail === undefined) return <p>Loading data...</p>;
 
   return (
     <div>
-      <p>From: {props.location.state.id_user_from}</p>
-      <p>To: {props.location.state.id_user_to}</p>
-      <p>Subject: {props.location.state.subject}</p>
-      <p>{props.location.state.message}</p>
+      <p>From: {mail.id_user_from}</p>
+      <p>To: {mail.id_user_to}</p>
+      <p>Subject: {mail.subject}</p>
+      <p>{mail.message}</p>
     </div>
   );
 }
