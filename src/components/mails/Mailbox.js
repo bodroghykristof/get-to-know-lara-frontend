@@ -33,7 +33,7 @@ function MailBox(props) {
       <tbody>
         {mails.map((mail, index) => (
           <tr key={index}>
-            <td>{mail.sent}</td>
+            <td>{mail.created}</td>
             <td>{mail.is_read}</td>
             <td>{mail.partner}</td>
             <td>{mail.partner_email}</td>
