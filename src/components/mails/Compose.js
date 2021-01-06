@@ -16,7 +16,7 @@ function Compose() {
     getUsers();
   }, []);
 
-  async function sendMessage() {
+  async function sendMessage(finished = true) {
     const partnerId = partner.current.value;
     const messageSubject = subject.current.value;
     const messageBody = message.current.value;
@@ -26,6 +26,7 @@ function Compose() {
       id_user_to: partnerId,
       subject: messageSubject,
       message: messageBody,
+      finished: finished,
     };
 
     await axios.post(`${backEnd.address}/api/mails`, email);
@@ -56,7 +57,8 @@ function Compose() {
         ref={message}
       ></textarea>
       <br></br>
-      <button onClick={sendMessage}>Send</button>
+      <button onClick={() => sendMessage(true)}>Send</button>
+      <button onClick={() => sendMessage(false)}>Save</button>
     </div>
   );
 }
