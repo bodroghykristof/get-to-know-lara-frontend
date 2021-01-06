@@ -29,7 +29,7 @@ function Login() {
   async function login(user) {
     const answer = await axios.post(`${backEnd.address}/login`, user);
     console.log(answer);
-    window.location.replace('/');
+    window.location.replace('/mail/inbox');
   }
 
   return (
