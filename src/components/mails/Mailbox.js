@@ -39,7 +39,9 @@ function MailBox(props) {
             <td>{mail.is_read}</td>
             <td>{mail.partner}</td>
             <td>{mail.partner_email}</td>
-            <td>{mail.subject}</td>
+            <Link to={{ pathname: `/mail/view/${mail.id}`, state: mail }}>
+              <td>{mail.subject}</td>
+            </Link>
             {props.type === 'drafts' ? (
               <td>
                 <Link to={{ pathname: '/mail/compose', state: mail }}>

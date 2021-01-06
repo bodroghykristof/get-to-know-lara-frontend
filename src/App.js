@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Register from './components/users/Register';
 import Login from './components/users/Login';
 import MailBox from './components/mails/Mailbox';
+import MailView from './components/mails/MailView';
 import Compose from './components/mails/Compose';
 import Main from './components/Main';
 import { ThemeProvider } from 'styled-components';
@@ -32,6 +33,7 @@ function App() {
           render={() => <MailBox type='drafts' />}
         ></Route>
         <Route path='/mail/compose' exact component={Compose}></Route>
+        <Route path='/mail/view/:id' exact component={MailView}></Route>
       </ThemeProvider>
     </Router>
   );
