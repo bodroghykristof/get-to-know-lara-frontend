@@ -3,11 +3,12 @@ import axios from 'axios';
 import backEnd from '../general/Backend';
 
 function MailView(props) {
+  const userId = 1;
   const mail = props.location.state;
 
   useEffect(() => {
     const setRead = async () => {
-      if (!mail.is_read) {
+      if (!mail.is_read && mail.id_user_to === userId) {
         const mailInfo = { id: mail.id, is_read: true };
         await axios.put(`${backEnd.address}/api/mails/${mail.id}`, mailInfo);
       }
