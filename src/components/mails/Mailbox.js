@@ -15,7 +15,7 @@ function MailBox(props) {
       setMails(receivedMails.data);
     }
     getMails();
-  }, []);
+  }, [props.type]);
 
   if (mails === null) return <p>Loading data...</p>;
 
