@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Register from './components/users/Register';
 import Login from './components/users/Login';
 import MailBox from './components/mails/Mailbox';
@@ -12,6 +12,7 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={mainTheme}>
+        <Link to='/'>Home</Link>
         <Route path='/' exact component={Main}></Route>
         <Route path='/registration' exact component={Register}></Route>
         <Route path='/login' exact component={Login}></Route>
