@@ -6,6 +6,8 @@ function Main() {
     <div>
       <Link to='/registration'>Register</Link>
       <Link to='/login'>Login</Link>
+      <Link to='/mail/inbox'>Inbox</Link>
+      <Link to='/mail/sent'>Sent</Link>
     </div>
   );
 }
