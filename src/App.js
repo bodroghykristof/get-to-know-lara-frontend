@@ -17,7 +17,12 @@ function App() {
         <Route
           path='/mail/inbox'
           exact
-          render={() => <MailBox type='inbox' />}
+          render={() => <MailBox type='to' />}
+        ></Route>
+        <Route
+          path='/mail/sent'
+          exact
+          render={() => <MailBox type='from' />}
         ></Route>
       </ThemeProvider>
     </Router>

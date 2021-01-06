@@ -10,7 +10,7 @@ function MailBox(props) {
   useEffect(() => {
     async function getMails() {
       const receivedMails = await axios.get(
-        `${backEnd.address}/api/mails/to/${userId}`
+        `${backEnd.address}/api/mails/${props.type}/${userId}`
       );
       setMails(receivedMails.data);
     }
