@@ -29,10 +29,12 @@ function Compose(props) {
       finished: finished,
     };
 
-    // if (props.location.state) {
-    //   await axios.put(`${backEnd.address}/api/mails`, email);
-    // }
-    await axios.post(`${backEnd.address}/api/mails`, email);
+    if (props.location.state) {
+      const mailId = props.location.state.id;
+      await axios.put(`${backEnd.address}/api/mails/${mailId}`, email);
+    } else {
+      await axios.post(`${backEnd.address}/api/mails`, email);
+    }
     window.location.replace('/mail/sent');
   }
 
