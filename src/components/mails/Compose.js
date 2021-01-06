@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import backEnd from '../general/Backend';
 
-function Compose() {
+function Compose(props) {
   const [users, setUsers] = useState(null);
   const subject = useRef(null);
   const message = useRef(null);
@@ -46,7 +46,12 @@ function Compose() {
         ))}
       </select>
       <br></br>
-      <input type='text' placeholder='Subject' ref={subject} />
+      <input
+        type='text'
+        placeholder='Subject'
+        value={props.location.state ? props.location.state.subject : ''}
+        ref={subject}
+      />
       <br></br>
       <textarea
         name='message'
@@ -55,7 +60,9 @@ function Compose() {
         rows='10'
         placeholder='Type here...'
         ref={message}
-      ></textarea>
+      >
+        {props.location.state ? props.location.state.message : ''}
+      </textarea>
       <br></br>
       <button onClick={() => sendMessage(true)}>Send</button>
       <button onClick={() => sendMessage(false)}>Save</button>
