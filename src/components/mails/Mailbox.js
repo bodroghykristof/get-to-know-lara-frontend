@@ -35,8 +35,8 @@ function MailBox(props) {
           <tr key={index}>
             <td>{mail.sent}</td>
             <td>{mail.is_read}</td>
-            <td>{mail.from}</td>
-            <td>{mail.from_email}</td>
+            <td>{mail.partner}</td>
+            <td>{mail.partner_email}</td>
             <td>{mail.subject}</td>
           </tr>
         ))}
