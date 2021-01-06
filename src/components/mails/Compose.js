@@ -43,7 +43,12 @@ function Compose(props) {
   return (
     <div>
       <p>Select partner!</p>
-      <select ref={partner}>
+      <select
+        ref={partner}
+        defaultValue={
+          props.location.state ? props.location.state.id_user_to : null
+        }
+      >
         {users.map((user, index) => (
           <option value={user.id} key={index}>
             {user.name}
