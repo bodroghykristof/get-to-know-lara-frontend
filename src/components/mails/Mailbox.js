@@ -42,7 +42,9 @@ function MailBox(props) {
             <td>{mail.subject}</td>
             {props.type === 'drafts' ? (
               <td>
-                <Link to='/mail/compose'>Modify</Link>
+                <Link to={{ pathname: '/mail/compose', state: mail }}>
+                  Modify
+                </Link>
               </td>
             ) : null}
           </tr>
