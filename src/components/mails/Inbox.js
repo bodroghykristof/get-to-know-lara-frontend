@@ -19,11 +19,22 @@ function Inbox() {
   if (mails === null) return;
 
   return (
-    <div>
+    <table>
+      <thead>
+        <th>Date</th>
+        <th>Read</th>
+        <th>From</th>
+        <th>Subject</th>
+      </thead>
       {mails.map((mail, index) => (
-        <p key={index}>{mail.message}</p>
+        <tr>
+          <td>{mail.sent}</td>
+          <td>{mail.is_read}</td>
+          <td>{mail.id_user_from}</td>
+          <td>{mail.subject}</td>
+        </tr>
       ))}
-    </div>
+    </table>
   );
 }
 
