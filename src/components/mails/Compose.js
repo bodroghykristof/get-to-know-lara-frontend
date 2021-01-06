@@ -6,6 +6,7 @@ function Compose() {
   const [users, setUsers] = useState(null);
   const subject = useRef(null);
   const message = useRef(null);
+  const partner = useRef(null);
 
   useEffect(() => {
     async function getUsers() {
@@ -15,17 +16,28 @@ function Compose() {
     getUsers();
   }, []);
 
-  const sendMessage = () => {
-    console.log(subject.current.value);
-    console.log(message.current.value);
-  };
+  async function sendMessage() {
+    const partnerId = partner.current.value;
+    const messageSubject = subject.current.value;
+    const messageBody = message.current.value;
+
+    const email = {
+      id_user_from: 1,
+      id_user_to: partnerId,
+      subject: messageSubject,
+      message: messageBody,
+    };
+
+    await axios.post(`${backEnd.address}/api/mails`, email);
+    window.location.replace('/mail/sent');
+  }
 
   if (users === null) return <p>Loading data...</p>;
 
   return (
     <div>
       <p>Select partner!</p>
-      <select>
+      <select ref={partner}>
         {users.map((user, index) => (
           <option value={user.id} key={index}>
             {user.name}
