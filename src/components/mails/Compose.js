@@ -29,6 +29,9 @@ function Compose(props) {
       finished: finished,
     };
 
+    // if (props.location.state) {
+    //   await axios.put(`${backEnd.address}/api/mails`, email);
+    // }
     await axios.post(`${backEnd.address}/api/mails`, email);
     window.location.replace('/mail/sent');
   }
@@ -49,7 +52,7 @@ function Compose(props) {
       <input
         type='text'
         placeholder='Subject'
-        value={props.location.state ? props.location.state.subject : ''}
+        defaultValue={props.location.state ? props.location.state.subject : ''}
         ref={subject}
       />
       <br></br>
@@ -59,10 +62,9 @@ function Compose(props) {
         cols='30'
         rows='10'
         placeholder='Type here...'
+        defaultValue={props.location.state ? props.location.state.message : ''}
         ref={message}
-      >
-        {props.location.state ? props.location.state.message : ''}
-      </textarea>
+      ></textarea>
       <br></br>
       <button onClick={() => sendMessage(true)}>Send</button>
       <button onClick={() => sendMessage(false)}>Save</button>
