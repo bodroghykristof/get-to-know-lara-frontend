@@ -13,9 +13,17 @@ function Compose() {
     getUsers();
   }, []);
 
+  if (users === null) return <p>Loading data...</p>;
+
   return (
     <div>
-      <input type='text' placeholder='Subject' />
+      <p>Select partner!</p>
+      <select>
+        {users.map((user) => (
+          <option value={user.id}>{user.name}</option>
+        ))}
+      </select>
+      <br></br>
       <input type='text' placeholder='Subject' />
       <br></br>
       <textarea
