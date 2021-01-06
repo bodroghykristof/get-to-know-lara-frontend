@@ -26,7 +26,7 @@ function MailBox(props) {
         <tr>
           <th>Date</th>
           <th>Read</th>
-          <th>From</th>
+          <th>{props.type === 'to' ? 'From' : 'To'}</th>
           <th>Email</th>
           <th>Subject</th>
           {props.type === 'drafts' ? <th></th> : null}
