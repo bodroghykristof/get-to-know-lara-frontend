@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import backEnd from '../general/Backend';
 
-function Inbox() {
+function MailBox(props) {
   const userId = 1;
-  const [mails, setMails] = useState([]);
+  const [mails, setMails] = useState(null);
 
   useEffect(() => {
     async function getMails() {
@@ -16,7 +17,7 @@ function Inbox() {
     getMails();
   }, []);
 
-  if (mails === null) return;
+  if (mails === null) return <p>Loading data...</p>;
 
   return (
     <table>
@@ -44,4 +45,8 @@ function Inbox() {
   );
 }
 
-export default Inbox;
+MailBox.propTypes = {
+  type: PropTypes.string.isRequired,
+};
+
+export default MailBox;
