@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Register from './components/users/Register';
 import Login from './components/users/Login';
 import MailBox from './components/mails/Mailbox';
+import Compose from './components/mails/Compose';
 import Main from './components/Main';
 import { ThemeProvider } from 'styled-components';
 import mainTheme from './components/general/MainTheme';
@@ -24,6 +25,7 @@ function App() {
           exact
           render={() => <MailBox type='from' />}
         ></Route>
+        <Route path='/mail/compose' exact component={Compose}></Route>
       </ThemeProvider>
     </Router>
   );

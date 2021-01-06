@@ -8,6 +8,7 @@ function Main() {
       <Link to='/login'>Login</Link>
       <Link to='/mail/inbox'>Inbox</Link>
       <Link to='/mail/sent'>Sent</Link>
+      <Link to='/mail/compose'>Compose</Link>
     </div>
   );
 }
