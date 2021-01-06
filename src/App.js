@@ -26,6 +26,11 @@ function App() {
           exact
           render={() => <MailBox type='from' />}
         ></Route>
+        <Route
+          path='/mail/drafts'
+          exact
+          render={() => <MailBox type='drafts' />}
+        ></Route>
         <Route path='/mail/compose' exact component={Compose}></Route>
       </ThemeProvider>
     </Router>
