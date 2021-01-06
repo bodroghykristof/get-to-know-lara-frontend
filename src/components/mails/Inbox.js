@@ -21,19 +21,25 @@ function Inbox() {
   return (
     <table>
       <thead>
-        <th>Date</th>
-        <th>Read</th>
-        <th>From</th>
-        <th>Subject</th>
-      </thead>
-      {mails.map((mail, index) => (
         <tr>
-          <td>{mail.sent}</td>
-          <td>{mail.is_read}</td>
-          <td>{mail.id_user_from}</td>
-          <td>{mail.subject}</td>
+          <th>Date</th>
+          <th>Read</th>
+          <th>From</th>
+          <th>Email</th>
+          <th>Subject</th>
         </tr>
-      ))}
+      </thead>
+      <tbody>
+        {mails.map((mail, index) => (
+          <tr key={index}>
+            <td>{mail.sent}</td>
+            <td>{mail.is_read}</td>
+            <td>{mail.from}</td>
+            <td>{mail.from_email}</td>
+            <td>{mail.subject}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 }
