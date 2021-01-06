@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import backEnd from '../general/Backend';
@@ -28,6 +29,7 @@ function MailBox(props) {
           <th>From</th>
           <th>Email</th>
           <th>Subject</th>
+          {props.type === 'drafts' ? <th></th> : null}
         </tr>
       </thead>
       <tbody>
@@ -38,6 +40,11 @@ function MailBox(props) {
             <td>{mail.partner}</td>
             <td>{mail.partner_email}</td>
             <td>{mail.subject}</td>
+            {props.type === 'drafts' ? (
+              <td>
+                <Link to='/mail/compose'>Modify</Link>
+              </td>
+            ) : null}
           </tr>
         ))}
       </tbody>
