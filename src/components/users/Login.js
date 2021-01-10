@@ -1,12 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import UserFormContainer from './UserFormContainer';
 import axios from 'axios';
 import backEnd from '../general/Backend';
+import { TokenContext } from '../general/TokenContext';
 
 function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   const email = useRef(null);
   const password = useRef(null);
+  const [token, setToken] = useContext(TokenContext);
 
   const forgotPasswordAction = () =>
     alert('Shame on you, we do not have any smart solution for this yet');
@@ -32,6 +34,7 @@ function Login() {
         `${backEnd.address}/api/auth/login`,
         user
       );
+      setToken(answer.access_token);
       window.location.replace('/mail/inbox');
     } catch (e) {
       setErrorMessage('Incorrect email or password');
