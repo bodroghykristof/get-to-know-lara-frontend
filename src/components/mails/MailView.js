@@ -12,7 +12,7 @@ function MailView(props) {
     async function fetchMail() {
       let mailData = mail;
       if (mail === undefined) {
-        mailData = await axios.get(`${backEnd.address}/api/mails/${mailId}`)
+        mailData = (await axios.get(`${backEnd.address}/api/mails/${mailId}`))
           .data;
         console.log(mailData);
       }

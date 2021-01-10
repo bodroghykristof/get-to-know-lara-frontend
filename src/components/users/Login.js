@@ -27,7 +27,9 @@ function Login() {
   };
 
   async function login(user) {
-    const answer = await axios.post(`${backEnd.address}/login`, user);
+    const answer = await axios.post(`${backEnd.address}/api/auth/login`, user, {
+      withCredentials: true,
+    });
     console.log(answer);
     // window.location.replace('/mail/inbox');
   }
