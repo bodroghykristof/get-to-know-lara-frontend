@@ -27,11 +27,18 @@ function Login() {
   };
 
   async function login(user) {
-    const answer = await axios.post(`${backEnd.address}/api/auth/login`, user, {
-      withCredentials: true,
-    });
-    console.log(answer);
-    // window.location.replace('/mail/inbox');
+    try {
+      const answer = await axios.post(
+        `${backEnd.address}/api/auth/login`,
+        user,
+        {
+          withCredentials: true,
+        }
+      );
+      window.location.replace('/mail/inbox');
+    } catch (e) {
+      setErrorMessage('Incorrect email or password');
+    }
   }
 
   return (
