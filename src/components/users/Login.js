@@ -30,10 +30,7 @@ function Login() {
     try {
       const answer = await axios.post(
         `${backEnd.address}/api/auth/login`,
-        user,
-        {
-          withCredentials: true,
-        }
+        user
       );
       window.location.replace('/mail/inbox');
     } catch (e) {
