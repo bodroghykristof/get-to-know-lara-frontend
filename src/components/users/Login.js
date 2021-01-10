@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext } from 'react';
-import UserFormContainer from './UserFormContainer';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import UserFormContainer from './UserFormContainer';
 import backEnd from '../general/Backend';
 import { TokenContext } from '../general/TokenContext';
 
@@ -34,12 +35,14 @@ function Login() {
         `${backEnd.address}/api/auth/login`,
         user
       );
-      setToken(answer.access_token);
-      window.location.replace('/mail/inbox');
+      console.log(answer.data.access_token);
+      setToken(answer.data.access_token);
     } catch (e) {
       setErrorMessage('Incorrect email or password');
     }
   }
+
+  if (token !== null) return <Redirect to='/' />;
 
   return (
     <UserFormContainer>

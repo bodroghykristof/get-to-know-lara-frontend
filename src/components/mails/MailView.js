@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import backEnd from '../general/Backend';
+import { TokenContext } from '../general/TokenContext';
 
 function MailView(props) {
   const userId = 1;
   const { mailId } = useParams();
   const [mail, setMail] = useState(props.location.state);
+  const [token, setToken] = useContext(TokenContext);
 
   useEffect(() => {
     async function fetchMail() {
@@ -25,6 +27,7 @@ function MailView(props) {
     fetchMail();
   }, [mail, mailId]);
 
+  if (token === null) return <Redirect to='/login' />;
   if (mail === undefined) return <p>Loading data...</p>;
 
   return (

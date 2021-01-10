@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import backEnd from '../general/Backend';
+import { TokenContext } from '../general/TokenContext';
+
 
 function MailBox(props) {
   const userId = 1;
   const [mails, setMails] = useState(null);
+  const [token, setToken] = useContext(TokenContext);
+
 
   useEffect(() => {
     async function getMails() {
@@ -18,6 +22,7 @@ function MailBox(props) {
     getMails();
   }, [props.type]);
 
+  if (token === null) return <Redirect to='/login' />;
   if (mails === null) return <p>Loading data...</p>;
 
   return (

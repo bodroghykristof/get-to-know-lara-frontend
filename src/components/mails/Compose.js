@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import backEnd from '../general/Backend';
+import { TokenContext } from '../general/TokenContext';
 
 function Compose(props) {
   const [users, setUsers] = useState(null);
   const subject = useRef(null);
   const message = useRef(null);
   const partner = useRef(null);
+  const [token, setToken] = useContext(TokenContext);
 
   useEffect(() => {
     async function getUsers() {
@@ -38,6 +41,7 @@ function Compose(props) {
     window.location.replace('/mail/sent');
   }
 
+  if (token === null) return <Redirect to='/login' />;
   if (users === null) return <p>Loading data...</p>;
 
   return (
