@@ -36,7 +36,10 @@ function Register() {
   };
 
   async function register(user) {
-    const answer = await axios.post(`${backEnd.address}/auth/api/register`, user);
+    const answer = await axios.post(
+      `${backEnd.address}/api/auth/register`,
+      user
+    );
     console.log(answer);
     window.location.replace('/');
   }
