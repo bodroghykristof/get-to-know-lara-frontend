@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import backEnd from '../general/Backend';
 import { TokenContext } from '../general/TokenContext';
+import RequireAuth from '../../authentication/RequireAuth';
 
 function MailBox(props) {
   const userId = 1;
   const [mails, setMails] = useState(null);
-  const [token, setToken] = useContext(TokenContext);
+  const [token] = useContext(TokenContext);
 
   useEffect(() => {
     async function getMails() {
@@ -17,11 +18,9 @@ function MailBox(props) {
       );
       setMails(receivedMails.data);
     }
-    // getMails();
     if (token !== null) getMails();
   }, [props.type, token]);
 
-  if (token === null) return <Redirect to='/login' />;
   if (mails === null) return <p>Loading data...</p>;
 
   return (
@@ -75,4 +74,4 @@ MailBox.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-export default MailBox;
+export default RequireAuth(MailBox);

@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import backEnd from '../general/Backend';
 import { TokenContext } from '../general/TokenContext';
+import RequireAuth from '../../authentication/RequireAuth';
 
 function Compose(props) {
   const [users, setUsers] = useState(null);
   const subject = useRef(null);
   const message = useRef(null);
   const partner = useRef(null);
-  const [token, setToken] = useContext(TokenContext);
+  const [token] = useContext(TokenContext);
   const history = useHistory();
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function Compose(props) {
       setUsers(receivedMails.data);
     }
     if (token !== null) getUsers();
-  }, []);
+  }, [token]);
 
   async function sendMessage(finished = true) {
     const partnerId = partner.current.value;
@@ -42,7 +43,6 @@ function Compose(props) {
     history.push('/');
   }
 
-  if (token === null) return <Redirect to='/login' />;
   if (users === null) return <p>Loading data...</p>;
 
   return (
@@ -84,4 +84,4 @@ function Compose(props) {
   );
 }
 
-export default Compose;
+export default RequireAuth(Compose);

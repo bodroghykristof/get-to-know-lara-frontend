@@ -3,12 +3,13 @@ import { useParams, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import backEnd from '../general/Backend';
 import { TokenContext } from '../general/TokenContext';
+import RequireAuth from '../../authentication/RequireAuth';
 
 function MailView(props) {
   const userId = 1;
   const { mailId } = useParams();
   const [mail, setMail] = useState(props.location.state);
-  const [token, setToken] = useContext(TokenContext);
+  const [token] = useContext(TokenContext);
 
   useEffect(() => {
     async function fetchMail() {
@@ -24,10 +25,9 @@ function MailView(props) {
       }
       setMail(mailData);
     }
-    fetchMail();
-  }, [mail, mailId]);
+    if (token !== null) fetchMail();
+  }, [mail, mailId, token]);
 
-  if (token === null) return <Redirect to='/login' />;
   if (mail === undefined) return <p>Loading data...</p>;
 
   return (
@@ -40,4 +40,4 @@ function MailView(props) {
   );
 }
 
-export default MailView;
+export default RequireAuth(MailView);

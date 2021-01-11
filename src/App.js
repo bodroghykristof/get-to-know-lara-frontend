@@ -11,6 +11,7 @@ import { TokenProvider } from './components/general/TokenContext';
 import mainTheme from './components/general/MainTheme';
 
 function App() {
+
   return (
     <Router>
       <ThemeProvider theme={mainTheme}>
