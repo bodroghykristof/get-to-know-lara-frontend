@@ -17,7 +17,7 @@ function Compose(props) {
       const receivedMails = await axios.get(`${backEnd.address}/api/users`);
       setUsers(receivedMails.data);
     }
-    getUsers();
+    if (token !== null) getUsers();
   }, []);
 
   async function sendMessage(finished = true) {
@@ -39,7 +39,7 @@ function Compose(props) {
     } else {
       await axios.post(`${backEnd.address}/api/mails`, email);
     }
-    history.push("/");
+    history.push('/');
   }
 
   if (token === null) return <Redirect to='/login' />;

@@ -17,9 +17,9 @@ function MailBox(props) {
       );
       setMails(receivedMails.data);
     }
-    getMails();
-    // if (token !== null) getMails();
-  }, [props.type]);
+    // getMails();
+    if (token !== null) getMails();
+  }, [props.type, token]);
 
   if (token === null) return <Redirect to='/login' />;
   if (mails === null) return <p>Loading data...</p>;
