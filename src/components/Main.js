@@ -4,13 +4,6 @@ import axios from 'axios';
 import backEnd from './general/Backend';
 
 function Main() {
-  useEffect(() => {
-    async function fetchMail() {
-      await axios.get(`${backEnd.address}/`);
-    }
-    fetchMail();
-  }, []);
-
   return (
     <div>
       <Link to='/registration'>Register</Link>
