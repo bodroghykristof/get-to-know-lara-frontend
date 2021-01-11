@@ -13,9 +13,11 @@ function Compose(props) {
   const [token] = useContext(TokenContext);
   const history = useHistory();
 
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+
   useEffect(() => {
     async function getUsers() {
-      const receivedMails = await axios.get(`${backEnd.address}/api/users`);
+      const receivedMails = await axios.get(`${backEnd.address}/api/users`, config);
       setUsers(receivedMails.data);
     }
     if (token !== null) getUsers();
@@ -27,7 +29,6 @@ function Compose(props) {
     const messageBody = message.current.value;
 
     const email = {
-      id_user_from: 1,
       id_user_to: partnerId,
       subject: messageSubject,
       message: messageBody,
@@ -36,9 +37,9 @@ function Compose(props) {
 
     if (props.location.state) {
       const mailId = props.location.state.id;
-      await axios.put(`${backEnd.address}/api/mails/${mailId}`, email);
+      await axios.put(`${backEnd.address}/api/mails/${mailId}`, email, config);
     } else {
-      await axios.post(`${backEnd.address}/api/mails`, email);
+      await axios.post(`${backEnd.address}/api/mails`, email, config);
     }
     history.push('/');
   }
