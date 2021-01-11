@@ -7,14 +7,14 @@ import { TokenContext } from '../general/TokenContext';
 import RequireAuth from '../../authentication/RequireAuth';
 
 function MailBox(props) {
-  const userId = 1;
   const [mails, setMails] = useState(null);
   const [token] = useContext(TokenContext);
 
   useEffect(() => {
     async function getMails() {
       const receivedMails = await axios.get(
-        `${backEnd.address}/api/mails/${props.type}/${userId}`
+        `${backEnd.address}/api/${props.type}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       setMails(receivedMails.data);
     }

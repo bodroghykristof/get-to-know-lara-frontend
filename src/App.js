@@ -11,7 +11,6 @@ import { TokenProvider } from './components/general/TokenContext';
 import mainTheme from './components/general/MainTheme';
 
 function App() {
-
   return (
     <Router>
       <ThemeProvider theme={mainTheme}>
@@ -23,12 +22,12 @@ function App() {
           <Route
             path='/mail/inbox'
             exact
-            render={() => <MailBox type='to' />}
+            render={() => <MailBox type='inbox' />}
           ></Route>
           <Route
             path='/mail/sent'
             exact
-            render={() => <MailBox type='from' />}
+            render={() => <MailBox type='sent' />}
           ></Route>
           <Route
             path='/mail/drafts'
