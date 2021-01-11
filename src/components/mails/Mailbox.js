@@ -5,12 +5,10 @@ import axios from 'axios';
 import backEnd from '../general/Backend';
 import { TokenContext } from '../general/TokenContext';
 
-
 function MailBox(props) {
   const userId = 1;
   const [mails, setMails] = useState(null);
   const [token, setToken] = useContext(TokenContext);
-
 
   useEffect(() => {
     async function getMails() {
@@ -20,6 +18,7 @@ function MailBox(props) {
       setMails(receivedMails.data);
     }
     getMails();
+    // if (token !== null) getMails();
   }, [props.type]);
 
   if (token === null) return <Redirect to='/login' />;

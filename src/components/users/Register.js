@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import UserFormContainer from './UserFormContainer';
 import axios from 'axios';
 import backEnd from '../general/Backend';
@@ -9,6 +10,7 @@ function Register() {
   const email = useRef(null);
   const passwordOne = useRef(null);
   const passwordTwo = useRef(null);
+  const history = useHistory();
 
   const checkRegistration = () => {
     const userNameInput = userName.current.value;
@@ -41,7 +43,7 @@ function Register() {
       user
     );
     console.log(answer);
-    window.location.replace('/');
+    history.push("/");
   }
 
   return (

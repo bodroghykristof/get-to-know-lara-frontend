@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import backEnd from '../general/Backend';
 import { TokenContext } from '../general/TokenContext';
@@ -10,6 +10,7 @@ function Compose(props) {
   const message = useRef(null);
   const partner = useRef(null);
   const [token, setToken] = useContext(TokenContext);
+  const history = useHistory();
 
   useEffect(() => {
     async function getUsers() {
@@ -38,7 +39,7 @@ function Compose(props) {
     } else {
       await axios.post(`${backEnd.address}/api/mails`, email);
     }
-    window.location.replace('/mail/sent');
+    history.push("/");
   }
 
   if (token === null) return <Redirect to='/login' />;
